@@ -28,13 +28,13 @@ public class FizzBuzzTest {
     private String playWithNumberRange(int start, int end) {
         String sequence = new String();
         for (int number = start; number <= end; number++) {
-            sequence += getWhitespaceIfNotEmpty(sequence);
+            sequence += getWhitespaceAfterFirstPlay(sequence);
             sequence += playWithNumber(number);
         }
         return sequence;
     }
 
-    private String getWhitespaceIfNotEmpty(String sequence) {
+    private String getWhitespaceAfterFirstPlay(String sequence) {
         if (!sequence.isEmpty()) {
             return " ";
         }
