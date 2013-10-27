@@ -67,6 +67,5 @@ public class FizzBuzzTest {
     @Before
     public void before() {
         game = new FizzBuzz();
-
     }
 }
