@@ -9,7 +9,7 @@ public class DivisibleRule implements GameRule {
     private final int divisor;
     private final String scoring;
 
-    DivisibleRule(int divisor, String scoring) {
+    public DivisibleRule(int divisor, String scoring) {
 
         this.divisor = divisor;
         this.scoring = scoring;

@@ -22,14 +22,14 @@ public class FizzBuzzStringCreator {
 
     private void appendScoringStringForNumber(Scoring scoreingForNumber) {
         if (!scoreingForNumber.hasScoring()) {
-            printNumberIfTheirIsNoScoring(scoreingForNumber);
+            appendNumberIfTheirIsNoScoring(scoreingForNumber);
         } else {
-            printNumberSeperator();
-            printScoring(scoreingForNumber);
+            appendNumberSeperator();
+            appendScoring(scoreingForNumber);
         }
     }
 
-    private void printNumberIfTheirIsNoScoring(Scoring scoreingForNumber) {
+    private void appendNumberIfTheirIsNoScoring(Scoring scoreingForNumber) {
         if (!scoringString.isEmpty()) {
             scoringString += numberSeperator + scoreingForNumber.getNumber().toString();
         } else {
@@ -37,13 +37,13 @@ public class FizzBuzzStringCreator {
         }
     }
 
-    private void printNumberSeperator() {
+    private void appendNumberSeperator() {
         if (!scoringString.isEmpty()) {
             scoringString += numberSeperator;
         }
     }
 
-    private void printScoring(Scoring scoreingForNumber) {
+    private void appendScoring(Scoring scoreingForNumber) {
         for (String score : scoreingForNumber.getScores()) {
             if (!scoringString.isEmpty()) {
                 scoringString += scoreSeperator + score;

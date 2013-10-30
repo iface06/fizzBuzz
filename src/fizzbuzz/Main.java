@@ -5,7 +5,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        FizzBuzzWoof game = initGame();
+        FizzBuzzWoofGame game = initGame();
         List<Scoring> scoring = game.play(1, 50);
         FizzBuzzStringCreator creator = new FizzBuzzStringCreator();
         creator.setSeperator(" - ");
@@ -14,8 +14,8 @@ public class Main {
         System.out.println(printout);
     }
 
-    private static FizzBuzzWoof initGame() {
-        FizzBuzzWoof game = new FizzBuzzWoof();
+    private static FizzBuzzWoofGame initGame() {
+        FizzBuzzWoofGame game = new FizzBuzzWoofGame();
         game.addRule(new NumberContainingRule(3, "Fizz"));
         game.addRule(new DivisibleRule(3, "Fizz"));
         game.addRule(new NumberContainingRule(5, "Buzz"));

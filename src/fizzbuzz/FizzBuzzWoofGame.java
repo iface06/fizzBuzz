@@ -2,7 +2,7 @@ package fizzbuzz;
 
 import java.util.*;
 
-public class FizzBuzzWoof {
+public class FizzBuzzWoofGame {
 
     private List<Scoring> scoring;
     private List<GameRule> rules = new LinkedList<>();

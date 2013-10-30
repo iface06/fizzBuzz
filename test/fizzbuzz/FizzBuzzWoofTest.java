@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class FizzBuzzWoofTest {
 
-    private FizzBuzzWoof game;
+    private FizzBuzzWoofGame game;
 
     @Test
     public void testSomeMethod() {
@@ -65,7 +65,7 @@ public class FizzBuzzWoofTest {
 
     @Before
     public void before() {
-        game = new FizzBuzzWoof();
+        game = new FizzBuzzWoofGame();
     }
 
     static class GetWhatYouGiveRule implements GameRule {

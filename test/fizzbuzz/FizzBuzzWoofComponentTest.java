@@ -8,7 +8,7 @@ public class FizzBuzzWoofComponentTest {
 
     @Test
     public void testNoRuleEffective() {
-        FizzBuzzWoof game = initGame();
+        FizzBuzzWoofGame game = initGame();
         List<Scoring> scoring = game.play(1, 2);
 
         assertGameScoring(scoring, Arrays.asList(scoring(1), scoring(2)));
@@ -16,7 +16,7 @@ public class FizzBuzzWoofComponentTest {
 
     @Test
     public void testFizzFizz() {
-        FizzBuzzWoof game = initGame();
+        FizzBuzzWoofGame game = initGame();
         List<Scoring> scoring = game.play(2, 3);
 
         assertGameScoring(scoring, Arrays.asList(scoring(2), scoring(3, "Fizz", "Fizz")));
@@ -24,7 +24,7 @@ public class FizzBuzzWoofComponentTest {
 
     @Test
     public void testBuzzBuzz() {
-        FizzBuzzWoof game = initGame();
+        FizzBuzzWoofGame game = initGame();
         List<Scoring> scoring = game.play(4, 5);
 
         assertGameScoring(scoring, Arrays.asList(scoring(4), scoring(5, "Buzz", "Buzz")));
@@ -32,7 +32,7 @@ public class FizzBuzzWoofComponentTest {
 
     @Test
     public void testFizzWoofWoof() {
-        FizzBuzzWoof game = initGame();
+        FizzBuzzWoofGame game = initGame();
         List<Scoring> scoring = game.play(6, 7);
 
         assertGameScoring(scoring, Arrays.asList(scoring(6, "Fizz"), scoring(7, "Woof", "Woof")));
@@ -40,7 +40,7 @@ public class FizzBuzzWoofComponentTest {
 
     @Test
     public void testFizzBuzzBuzz() {
-        FizzBuzzWoof game = initGame();
+        FizzBuzzWoofGame game = initGame();
         List<Scoring> scoring = game.play(14, 15);
 
         assertGameScoring(scoring, Arrays.asList(scoring(14, "Woof"), scoring(15, "Fizz", "Buzz", "Buzz")));
@@ -48,7 +48,7 @@ public class FizzBuzzWoofComponentTest {
 
     @Test
     public void testFizzFizzFizzFizz() {
-        FizzBuzzWoof game = initGame();
+        FizzBuzzWoofGame game = initGame();
         List<Scoring> scoring = game.play(33, 34);
 
         assertGameScoring(scoring, Arrays.asList(scoring(33, "Fizz", "Fizz", "Fizz"), scoring(34, "Fizz")));
@@ -76,8 +76,8 @@ public class FizzBuzzWoofComponentTest {
         return scoring;
     }
 
-    private FizzBuzzWoof initGame() {
-        FizzBuzzWoof game = new FizzBuzzWoof();
+    private FizzBuzzWoofGame initGame() {
+        FizzBuzzWoofGame game = new FizzBuzzWoofGame();
         game.addRule(new NumberContainingRule(3, "Fizz"));
         game.addRule(new DivisibleRule(3, "Fizz"));
         game.addRule(new NumberContainingRule(5, "Buzz"));

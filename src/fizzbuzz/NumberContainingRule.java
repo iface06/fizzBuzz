@@ -17,7 +17,7 @@ public class NumberContainingRule implements GameRule {
 
     @Override
     public List<String> apply(Integer number) {
-        scoring = new ArrayList<String>();
+        scoring = new ArrayList<>();
         splitDigitsOfNumber(number);
         collectScores(number);
 
@@ -26,13 +26,13 @@ public class NumberContainingRule implements GameRule {
 
     private void splitDigitsOfNumber(Integer number) {
         digitsOfNumber = new ArrayList<>();
-        splitDigits(number);
+        splitDecimalDigits(number);
 
     }
 
-    private void splitDigits(Integer number) {
+    private void splitDecimalDigits(Integer number) {
         if (number / 10 > 0) {
-            splitDigits(number / 10);
+            splitDecimalDigits(number / 10);
         }
         digitsOfNumber.add(number % 10);
     }
