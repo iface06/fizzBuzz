@@ -4,6 +4,10 @@ import java.util.List;
 
 public class Main {
 
+    public static final int FIZZ_CONSTANT = 3;
+    public static final int BUZZ_CONSTANT = 5;
+    public static final int WOOF_CONSTANT = 7;
+
     public static void main(String[] args) {
         FizzBuzzWoofGame game = initGame();
         List<Scoring> scoring = game.play(1, 50);
@@ -16,12 +20,12 @@ public class Main {
 
     private static FizzBuzzWoofGame initGame() {
         FizzBuzzWoofGame game = new FizzBuzzWoofGame();
-        game.addRule(new NumberContainingRule(3, "Fizz"));
-        game.addRule(new DivisibleRule(3, "Fizz"));
-        game.addRule(new NumberContainingRule(5, "Buzz"));
-        game.addRule(new DivisibleRule(5, "Buzz"));
-        game.addRule(new NumberContainingRule(7, "Woof"));
-        game.addRule(new DivisibleRule(7, "Woof"));
+        game.addRule(new NumberContainingRule(FIZZ_CONSTANT, "Fizz"));
+        game.addRule(new DivisibleRule(FIZZ_CONSTANT, "Fizz"));
+        game.addRule(new NumberContainingRule(BUZZ_CONSTANT, "Buzz"));
+        game.addRule(new DivisibleRule(BUZZ_CONSTANT, "Buzz"));
+        game.addRule(new NumberContainingRule(WOOF_CONSTANT, "Woof"));
+        game.addRule(new DivisibleRule(WOOF_CONSTANT, "Woof"));
         return game;
     }
 }

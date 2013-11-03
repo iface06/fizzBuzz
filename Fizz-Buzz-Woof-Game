@@ -1,0 +1,250 @@
+public class Main {
+    public static final int FIZZ_CONSTANT = 3;
+    public static final int BUZZ_CONSTANT = 5;
+    public static final int WOOF_CONSTANT = 7;
+
+    public static void main(String[] args) {
+        FizzBuzzWoofGame game = initGame();
+        List<Scoring> scoring = game.play(1, 50);
+        FizzBuzzStringCreator creator = new FizzBuzzStringCreator();
+        creator.setSeperator(" - ");
+        String printout = creator.create(scoring);
+
+        System.out.println(printout);
+    }
+
+    private static FizzBuzzWoofGame initGame() {
+        FizzBuzzWoofGame game = new FizzBuzzWoofGame();
+        game.addRule(new NumberContainingRule(FIZZ_CONSTANT, "Fizz"));
+        game.addRule(new DivisibleRule(FIZZ_CONSTANT, "Fizz"));
+        game.addRule(new NumberContainingRule(BUZZ_CONSTANT, "Buzz"));
+        game.addRule(new DivisibleRule(BUZZ_CONSTANT, "Buzz"));
+        game.addRule(new NumberContainingRule(WOOF_CONSTANT, "Woof"));
+        game.addRule(new DivisibleRule(WOOF_CONSTANT, "Woof"));
+        return game;
+    }
+}
+
+
+
+package fizzbuzz;
+
+import java.util.*;
+
+public class FizzBuzzWoofGame {
+
+    private List<Scoring> scoring;
+    private List<GameRule> rules = new LinkedList<>();
+    private Scoring scoringForNumber;
+
+    public List<Scoring> play(int startNumber, int endNumber) {
+        scoring = new ArrayList<>();
+        for (int number = startNumber; number <= endNumber; number++) {
+            createScoringForCurrentNumber(number);
+            playWithNumber(number);
+            scoring.add(scoringForNumber);
+        }
+
+        return scoring;
+    }
+
+    public void addRule(GameRule rule) {
+        rules.add(rule);
+    }
+
+    private Scoring createScoringForCurrentNumber(int number) {
+        scoringForNumber = new Scoring();
+        scoringForNumber.setNumber(number);
+        return scoringForNumber;
+    }
+
+    private void playWithNumber(int number) {
+        for (GameRule gameRule : rules) {
+            List<String> scoresForNumber = gameRule.apply(number);
+            scoringForNumber.addScores(scoresForNumber);
+        }
+    }
+}
+
+
+
+package fizzbuzz;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Scoring {
+
+    private Integer number;
+    private List<String> scores = new ArrayList<>();
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public List<String> getScores() {
+        return scores;
+    }
+
+    void addScores(List<String> scoresForNumber) {
+        this.scores.addAll(scoresForNumber);
+    }
+
+    boolean hasScoring() {
+        return !getScores().isEmpty();
+    }
+}
+
+
+
+package fizzbuzz;
+
+import java.util.List;
+
+public class FizzBuzzStringCreator {
+
+    private String numberSeperator = " ";
+    private String scoreSeperator = "";
+    private String scoringString;
+
+    public String create(List<Scoring> scoring) {
+        scoringString = new String();
+        for (Scoring scoreingForNumber : scoring) {
+            appendScoringStringForNumber(scoreingForNumber);
+        }
+        return scoringString;
+    }
+
+    public void setSeperator(String seperator) {
+        this.numberSeperator = seperator;
+    }
+
+    private void appendScoringStringForNumber(Scoring scoreingForNumber) {
+        if (!scoreingForNumber.hasScoring()) {
+            appendNumberIfTheirIsNoScoring(scoreingForNumber);
+        } else {
+            appendNumberSeperator();
+            appendScoring(scoreingForNumber);
+        }
+    }
+
+    private void appendNumberIfTheirIsNoScoring(Scoring scoreingForNumber) {
+        if (!scoringString.isEmpty()) {
+            scoringString += numberSeperator + scoreingForNumber.getNumber().toString();
+        } else {
+            scoringString += scoreingForNumber.getNumber().toString();
+        }
+    }
+
+    private void appendNumberSeperator() {
+        if (!scoringString.isEmpty()) {
+            scoringString += numberSeperator;
+        }
+    }
+
+    private void appendScoring(Scoring scoreingForNumber) {
+        for (String score : scoreingForNumber.getScores()) {
+            if (!scoringString.isEmpty()) {
+                scoringString += scoreSeperator + score;
+            } else {
+                scoringString += score;
+            }
+        }
+    }
+}
+
+
+
+package fizzbuzz;
+
+import java.util.List;
+
+public interface GameRule {
+
+    public List<String> apply(Integer number);
+}
+
+
+
+package fizzbuzz;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class DivisibleRule implements GameRule {
+
+    private final int divisor;
+    private final String scoring;
+
+    public DivisibleRule(int divisor, String scoring) {
+
+        this.divisor = divisor;
+        this.scoring = scoring;
+    }
+
+    @Override
+    public List<String> apply(Integer number) {
+        if (number > 0 && number % divisor == 0) {
+            return Arrays.asList(scoring);
+        } else {
+            return Collections.EMPTY_LIST;
+        }
+    }
+}
+
+
+
+package fizzbuzz;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class NumberContainingRule implements GameRule {
+
+    private final Integer scoreNumber;
+    private final String score;
+    private List<String> scoring;
+    private List<Integer> digitsOfNumber;
+
+    public NumberContainingRule(Integer scoreNumber, String score) {
+        this.scoreNumber = scoreNumber;
+        this.score = score;
+    }
+
+    @Override
+    public List<String> apply(Integer number) {
+        scoring = new ArrayList<>();
+        splitDigitsOfNumber(number);
+        collectScores(number);
+
+        return scoring;
+    }
+
+    private void splitDigitsOfNumber(Integer number) {
+        digitsOfNumber = new ArrayList<>();
+        splitDecimalDigits(number);
+
+    }
+
+    private void splitDecimalDigits(Integer number) {
+        if (number / 10 > 0) {
+            splitDecimalDigits(number / 10);
+        }
+        digitsOfNumber.add(number % 10);
+    }
+
+    private void collectScores(Integer number) {
+        int indexOfSearchedNumber = digitsOfNumber.indexOf(scoreNumber);
+        if (indexOfSearchedNumber > -1) {
+            scoring.add(score);
+            digitsOfNumber.remove(indexOfSearchedNumber);
+            collectScores(number);
+        }
+    }
+}
+
