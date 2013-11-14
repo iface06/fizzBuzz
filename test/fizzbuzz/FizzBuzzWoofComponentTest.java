@@ -9,7 +9,7 @@ public class FizzBuzzWoofComponentTest {
     @Test
     public void testNoRuleEffective() {
         FizzBuzzWoofGame game = initGame();
-        List<Scoring> scoring = game.play(1, 2);
+        List<Score> scoring = game.play(1, 2);
 
         assertGameScoring(scoring, Arrays.asList(scoring(1), scoring(2)));
     }
@@ -17,7 +17,7 @@ public class FizzBuzzWoofComponentTest {
     @Test
     public void testFizzFizz() {
         FizzBuzzWoofGame game = initGame();
-        List<Scoring> scoring = game.play(2, 3);
+        List<Score> scoring = game.play(2, 3);
 
         assertGameScoring(scoring, Arrays.asList(scoring(2), scoring(3, "Fizz", "Fizz")));
     }
@@ -25,7 +25,7 @@ public class FizzBuzzWoofComponentTest {
     @Test
     public void testBuzzBuzz() {
         FizzBuzzWoofGame game = initGame();
-        List<Scoring> scoring = game.play(4, 5);
+        List<Score> scoring = game.play(4, 5);
 
         assertGameScoring(scoring, Arrays.asList(scoring(4), scoring(5, "Buzz", "Buzz")));
     }
@@ -33,7 +33,7 @@ public class FizzBuzzWoofComponentTest {
     @Test
     public void testFizzWoofWoof() {
         FizzBuzzWoofGame game = initGame();
-        List<Scoring> scoring = game.play(6, 7);
+        List<Score> scoring = game.play(6, 7);
 
         assertGameScoring(scoring, Arrays.asList(scoring(6, "Fizz"), scoring(7, "Woof", "Woof")));
     }
@@ -41,7 +41,7 @@ public class FizzBuzzWoofComponentTest {
     @Test
     public void testFizzBuzzBuzz() {
         FizzBuzzWoofGame game = initGame();
-        List<Scoring> scoring = game.play(14, 15);
+        List<Score> scoring = game.play(14, 15);
 
         assertGameScoring(scoring, Arrays.asList(scoring(14, "Woof"), scoring(15, "Fizz", "Buzz", "Buzz")));
     }
@@ -49,12 +49,20 @@ public class FizzBuzzWoofComponentTest {
     @Test
     public void testFizzFizzFizzFizz() {
         FizzBuzzWoofGame game = initGame();
-        List<Scoring> scoring = game.play(33, 34);
+        List<Score> scoring = game.play(33, 34);
 
         assertGameScoring(scoring, Arrays.asList(scoring(33, "Fizz", "Fizz", "Fizz"), scoring(34, "Fizz")));
     }
+    
+    @Test
+    public void test35() {
+        FizzBuzzWoofGame game = initGame();
+        List<Score> scoring = game.play(34, 35);
 
-    private void assertGameScoring(List<Scoring> scorings, List<Scoring> expectedScorings) {
+        assertGameScoring(scoring, Arrays.asList(scoring(34, "Fizz"), scoring(35, "Fizz", "Buzz", "Buzz", "Woof")));
+    }
+
+    private void assertGameScoring(List<Score> scorings, List<Score> expectedScorings) {
         assertEquals(expectedScorings.size(), scorings.size());
         for (int i = 0; i < scorings.size(); i++) {
             assertEquals(expectedScorings.get(i).getNumber(), scorings.get(i).getNumber());
@@ -69,8 +77,8 @@ public class FizzBuzzWoofComponentTest {
         }
     }
 
-    private Scoring scoring(Integer number, String... scores) {
-        Scoring scoring = new Scoring();
+    private Score scoring(Integer number, String... scores) {
+        Score scoring = new Score();
         scoring.setNumber(number);
         scoring.addScores(Arrays.asList(scores));
         return scoring;

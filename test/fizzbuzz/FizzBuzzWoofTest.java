@@ -10,7 +10,7 @@ public class FizzBuzzWoofTest {
 
     @Test
     public void testSomeMethod() {
-        List<Scoring> scorings = game.play(1, 1);
+        List<Score> scorings = game.play(1, 1);
         assertGameScoring(scorings, Arrays.asList(scoring(1)));
     }
 
@@ -19,7 +19,7 @@ public class FizzBuzzWoofTest {
         GameRule rule = new GetWhatYouGiveRule();
         game.addRule(rule);
 
-        List<Scoring> scorings = game.play(1, 1);
+        List<Score> scorings = game.play(1, 1);
 
         assertGameScoring(scorings, Arrays.asList(scoring(1, "1")));
     }
@@ -31,7 +31,7 @@ public class FizzBuzzWoofTest {
         game.addRule(rule1);
         game.addRule(rule2);
 
-        List<Scoring> scorings = game.play(1, 1);
+        List<Score> scorings = game.play(1, 1);
 
         assertGameScoring(scorings, Arrays.asList(scoring(1, "1", "1")));
     }
@@ -43,19 +43,19 @@ public class FizzBuzzWoofTest {
         game.addRule(rule1);
         game.addRule(rule2);
 
-        List<Scoring> scorings = game.play(1, 2);
+        List<Score> scorings = game.play(1, 2);
 
         assertGameScoring(scorings, Arrays.asList(scoring(1, "1", "1"), scoring(2, "2", "2")));
     }
 
-    private Scoring scoring(Integer number, String... scores) {
-        Scoring scoring = new Scoring();
+    private Score scoring(Integer number, String... scores) {
+        Score scoring = new Score();
         scoring.setNumber(number);
         scoring.addScores(Arrays.asList(scores));
         return scoring;
     }
 
-    private void assertGameScoring(List<Scoring> scorings, List<Scoring> expectedScorings) {
+    private void assertGameScoring(List<Score> scorings, List<Score> expectedScorings) {
         assertEquals(expectedScorings.size(), scorings.size());
         for (int i = 0; i < scorings.size(); i++) {
             assertEquals(expectedScorings.get(i).getNumber(), scorings.get(i).getNumber());

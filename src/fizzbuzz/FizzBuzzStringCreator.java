@@ -8,9 +8,9 @@ public class FizzBuzzStringCreator {
     private String scoreSeperator = "";
     private String scoringString;
 
-    public String create(List<Scoring> scoring) {
+    public String create(List<Score> scoring) {
         scoringString = new String();
-        for (Scoring scoreingForNumber : scoring) {
+        for (Score scoreingForNumber : scoring) {
             appendScoringStringForNumber(scoreingForNumber);
         }
         return scoringString;
@@ -20,7 +20,7 @@ public class FizzBuzzStringCreator {
         this.numberSeperator = seperator;
     }
 
-    private void appendScoringStringForNumber(Scoring scoreingForNumber) {
+    private void appendScoringStringForNumber(Score scoreingForNumber) {
         if (!scoreingForNumber.hasScoring()) {
             appendNumberIfTheirIsNoScoring(scoreingForNumber);
         } else {
@@ -29,7 +29,7 @@ public class FizzBuzzStringCreator {
         }
     }
 
-    private void appendNumberIfTheirIsNoScoring(Scoring scoreingForNumber) {
+    private void appendNumberIfTheirIsNoScoring(Score scoreingForNumber) {
         if (!scoringString.isEmpty()) {
             scoringString += numberSeperator + scoreingForNumber.getNumber().toString();
         } else {
@@ -43,7 +43,7 @@ public class FizzBuzzStringCreator {
         }
     }
 
-    private void appendScoring(Scoring scoreingForNumber) {
+    private void appendScoring(Score scoreingForNumber) {
         for (String score : scoreingForNumber.getScores()) {
             if (!scoringString.isEmpty()) {
                 scoringString += scoreSeperator + score;

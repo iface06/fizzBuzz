@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class FizzBuzzStringCreatorTest {
 
-    private List<Scoring> scoring;
+    private List<Score> scoring;
     private FizzBuzzStringCreator printer;
 
     @Test
@@ -55,11 +55,11 @@ public class FizzBuzzStringCreatorTest {
     @Before
     public void before() {
         printer = new FizzBuzzStringCreator();
-        scoring = new ArrayList<Scoring>();
+        scoring = new ArrayList<Score>();
     }
 
-    private Scoring scoring(Integer number, String... scores) {
-        Scoring scoring = new Scoring();
+    private Score scoring(Integer number, String... scores) {
+        Score scoring = new Score();
         scoring.setNumber(number);
         scoring.addScores(Arrays.asList(scores));
         return scoring;

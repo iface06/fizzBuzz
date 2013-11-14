@@ -3,7 +3,7 @@ package fizzbuzz;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Scoring {
+public class Score {
 
     private Integer number;
     private List<String> scores = new ArrayList<>();

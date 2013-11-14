@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         FizzBuzzWoofGame game = initGame();
-        List<Scoring> scoring = game.play(1, 50);
+        List<Score> scoring = game.play(1, 50);
         FizzBuzzStringCreator creator = new FizzBuzzStringCreator();
         creator.setSeperator(" - ");
         String printout = creator.create(scoring);
