@@ -21,17 +21,11 @@ public class FizzBuzzWoofGame {
     }
 
     private Score playWithNumber(int number) {
-        Score scoreForNumber = createScoreForNumber(number);
+        Score scoreForNumber = new Score(number);
         for (GameRule gameRule : rules) {
             List<String> scoresForNumber = gameRule.apply(number);
             scoreForNumber.addScores(scoresForNumber);
         }
-        return scoreForNumber;
-    }
-    
-    private Score createScoreForNumber(int number) {
-        Score scoreForNumber = new Score();
-        scoreForNumber.setNumber(number);
         return scoreForNumber;
     }
 }

@@ -59,8 +59,7 @@ public class FizzBuzzStringCreatorTest {
     }
 
     private Score scoring(Integer number, String... scores) {
-        Score scoring = new Score();
-        scoring.setNumber(number);
+        Score scoring = new Score(number);
         scoring.addScores(Arrays.asList(scores));
         return scoring;
     }

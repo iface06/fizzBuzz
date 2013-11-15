@@ -8,12 +8,12 @@ public class Score {
     private Integer number;
     private List<String> scores = new ArrayList<>();
 
-    public Integer getNumber() {
-        return number;
+    public Score(int number) {
+        this.number = number;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public Integer getNumber() {
+        return number;
     }
 
     public List<String> getScores() {
